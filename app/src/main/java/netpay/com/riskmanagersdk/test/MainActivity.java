@@ -21,6 +21,8 @@ import netpay.com.riskmanager.core.beans.riskmanager.MerchantDefinedData;
 import netpay.com.riskmanager.core.beans.riskmanager.PurchaseTotals;
 import netpay.com.riskmanager.core.beans.riskmanager.Ship;
 import netpay.com.riskmanager.core.beans.transactions.ChargeTransactionResponse;
+import netpay.com.riskmanager.core.beans.transactions.Promotion;
+import netpay.com.riskmanager.core.beans.transactions.TransactionMerchant;
 import netpay.com.riskmanager.listeners.NetPayServiceListener;
 
 public class MainActivity extends AppCompatActivity implements NetPayServiceListener {
@@ -43,8 +45,7 @@ public class MainActivity extends AppCompatActivity implements NetPayServiceList
                 b.setCountry("MX");
                 b.setFirstName("Mailto");
                 b.setLastName("Lmailto");
-                b.setEmail("review@netpay.com.mx");
-                b.setEmail("review@netpay.com.mx");
+                b.setEmail("accept@netpay.com.mx");
                 b.setIpAddress("192.172.21.5.43");
                 b.setPhoneNumber("8119656543");
                 b.setPostalCode("67209");
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NetPayServiceList
 
                 PurchaseTotals p = new PurchaseTotals();
                 p.setCurrency("MXN");
-                p.setGrandTotalAmount("1346.50");
+                p.setGrandTotalAmount(1346.50);
 
                 List<MerchantDefinedData> merchantDefinedDatas = new ArrayList<>();
 
@@ -75,17 +76,17 @@ public class MainActivity extends AppCompatActivity implements NetPayServiceList
                 List<Item> items = new ArrayList<>();
                 Item i = new Item();
                 i.setId("12832");
-                i.setUnitPrice("1346.50");
+                i.setUnitPrice(1346.50);
                 i.setProductCode("Autos");
                 i.setProductName("HELICOPTERO VOICE COMMAN");
                 i.setProductSKU("17800884");
-                i.setQuantity("1");
+                i.setQuantity(1);
 
                 items.add(i);
 
                 RiskManager.getInstance()
                         .addNetPayServiceListener(MainActivity.this)
-                        .start(MainActivity.this,String.valueOf(new Date().getTime()),"000000",b, s, merchantDefinedDatas, items, p);
+                        .start(MainActivity.this,String.valueOf(new Date().getTime()), Promotion.NORMAL, TransactionMerchant.TransactionType.AUTH,b, s, merchantDefinedDatas, items, p);
             }
         });
 
